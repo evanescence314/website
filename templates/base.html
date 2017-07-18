@@ -1,0 +1,115 @@
+{% load i18n %}
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<title>{% block title %}TJ VMT{% endblock %}</title>
+</head>
+
+<body>
+	<div id="header">
+	{% block header %}
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">TJ VMT</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-main">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+		
+			<div class="collapse navbar-collapse" id="navbar-main">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Rankings<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="/rankings">Performance</a>
+							</li>
+							<li>
+								<a href="/lettering">Lettering</a>
+							</li>
+							<!--
+							<li class="divider">
+							</li>
+							<li>
+								<a href="#">TJ Hunt</a>
+							</li> -->
+						</ul>
+					</li>
+					<li>
+						<a href="/calendar">Schedule</a>
+					</li>
+					<li class="dropdown">
+						 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Wiki<strong class="caret"></strong></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="#">2017-2018 Archive</a>
+							</li>
+							<li class="divider"> </li>
+							<li>
+								<a href="https://drive.google.com/drive/folders/0B_PFJ4obRn43aFNQU3lWaUJQb0U">2016-2017 Archive</a>
+							</li>
+							<li>
+								<a href="https://drive.google.com/drive/folders/0B_PFJ4obRn43MThpS3RHQjRTT00?usp=sharing">Even Older Materials</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="/tjimo">TJ IMO</a>
+					</li>
+					{% if user.is_superuser %}
+					<li>
+						<a href="/admin">Admin</a>
+					</li>
+					{% endif %}
+				</ul>
+				{% if user.is_authenticated %}
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="/profile">{{ user.username }}</a></li>
+                    <li><a href="{% url 'auth_logout' %}">Logout</a></li>
+				</ul>
+				<!--
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="{% url 'registration_register' %}">Register</a></li>
+					<li><a href="{% url 'auth_login' %}">Login</a></li>
+				</ul> -->
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+	{% endblock %}
+	</div>
+
+	<div class="container" id="content">
+    {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+    {% endfor %}
+	{% block content %}{% endblock %}
+	</div>
+
+	<div class="container" id="footer">
+	{% block footer %}
+		<h4> <a href="mailto:vmtofficers@gmail.com">VMT Officers</a> </h4>
+		<p> Captain: <a href="mailto:2018akadaver@tjhsst.edu">Akshaj Kadaveru</a> </p>
+		<p> Co-Captains: <a href="mailto:jeffery08356@gmail.com">Jeffery Yu</a> and <a href="mailto:jleey2k@gmail.com">Joshua Lee</a> </p>
+		<p> Statisticians: <a href="mailto:katherine.y.cheng@gmail.com">Katherine Cheng</a> and <a href="mailto:ryan.k.347@gmail.com">Ryan Kim</a> </p>
+		<p> Finance officers: <a href="mailto:wendyqq2000@gmail.com">Wendy Yin</a>, <a href="mailto:mzyang2018@gmail.com">Michael Yang</a>,
+				<a href="mailto:kyle@gatesman.org">Kyle Gatesman</a>, and <a href="mailto:neeyanthkvk@gmail.com">Neeyanth Kopparapu</a> </p>
+		<p> Secretary: <a href="mailto:ruiran0326@gmail.com">Ruiran Xun</a>
+	{% endblock %}
+	</div>
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

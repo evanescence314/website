@@ -1,0 +1,14 @@
+Lecture:
+Title
+Type
+Subject
+Author
+Year
+
+Solutions:
+Contest
+Year
+
+Contests:
+Contest
+Year
